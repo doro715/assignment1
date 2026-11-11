@@ -40,7 +40,7 @@ public abstract class Car {
         currentSpeed = 0;
     }
 
-//  Abstract methods to be implemented by subclasses
+//  Since Saab and Volvo have different bodies of speedFactor, Abstract methods to be implemented by subclasses
     protected abstract double speedFactor();
 
 
@@ -62,3 +62,4 @@ public abstract class Car {
     }
 
 }
+

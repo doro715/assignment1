@@ -1,7 +1,8 @@
 import java.awt.*;
 
 public class Volvo240 extends Car {
-    private static double trimFactor = 1.25;
+//    prevent accidental change so using final
+    private static final double trimFactor = 1.25;
     public Volvo240(){
         super(4,100, Color.black, "Volvo240");}
 
