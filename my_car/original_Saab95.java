@@ -1,6 +1,7 @@
+package my_car;
 import java.awt.*;
 
-public class Saab95 {
+public class original_Saab95 {
 
     public boolean turboOn;
     public int nrDoors; // Number of doors on the car
@@ -9,7 +10,7 @@ public class Saab95 {
     public Color color; // Color of the car
     public String modelName; // The car model name
     
-    public Saab95() {
+    public original_Saab95() {
         nrDoors = 2;
         color = Color.red;
         enginePower = 125;

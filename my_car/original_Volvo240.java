@@ -1,6 +1,7 @@
+package my_car;
 import java.awt.*;
 
-public class Volvo240 {
+public class original_Volvo240 {
 
     public final static double trimFactor = 1.25;
     public int nrDoors; // Number of doors on the car
@@ -9,7 +10,7 @@ public class Volvo240 {
     public Color color; // Color of the car
     public String modelName; // The car model name
     
-    public Volvo240() {
+    public original_Volvo240() {
         nrDoors = 4;
         color = Color.black;
         enginePower = 100;
