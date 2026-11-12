@@ -1,19 +1,23 @@
 package my_car;
+
 import java.awt.*;
 
-public abstract class mycar implements my_moveable{
-    protected  final int nrDoors;
-    protected  final double enginePower;
+public abstract class mycar implements my_moveable {
+    protected final int nrDoors;
+    protected final double enginePower;
     protected double currentSpeed;
     private double x;
     private double y;
     private Direction direction;
     protected Color color;
-    protected  final String modelName;
-    public enum direction { NORTH, EAST, SOUTH, WEST }
+    protected final String modelName;
 
-//    Constructor
-    public mycar(int nrDoors, double enginePower, Color color, String modelName){
+    public enum Direction {
+        NORTH, EAST, SOUTH, WEST
+    }
+
+    // Constructor
+    public mycar(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -23,23 +27,28 @@ public abstract class mycar implements my_moveable{
         this.y = 0;
         this.direction = Direction.NORTH;
     }
-//Public interfaced
-    
+    // Public interface
+
     public int getNrDoors() {
         return nrDoors;
     }
+
     public double getEnginePower() {
         return enginePower;
     }
+
     public double getCurrentSpeed() {
         return currentSpeed;
     }
+
     public Color getColor() {
         return color;
     }
+
     public void setColor(Color clr) {
         color = clr;
     }
+
     public void startEngine() {
         currentSpeed = 0.1;
     }
@@ -48,11 +57,23 @@ public abstract class mycar implements my_moveable{
         currentSpeed = 0;
     }
 
-//  Since Saab and Volvo have different bodies of speedFactor, Abstract methods to be implemented by subclasses
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    // Since Saab and Volvo have different bodies of speedFactor, Abstract methods
+    // to be implemented by subclasses
     protected abstract double speedFactor();
 
-
-//    Internal access that only gas and brake using them
+    // Internal access that only gas and brake using them
     private void incrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
@@ -68,13 +89,48 @@ public abstract class mycar implements my_moveable{
     public void brake(double amount) {
         decrementSpeed(amount);
     }
-//  my moveable contract
-public void move();
 
-public void turnLeft();
+    // my moveable contract
+    @Override
+    public void move() {
+        if (direction == Direction.NORTH) {
+            y += currentSpeed;
+        } else if (direction == Direction.SOUTH) {
+            y -= currentSpeed;
+        } else if (direction == Direction.EAST) {
+            x += currentSpeed;
+        } else if (direction == Direction.WEST) {
+            x -= currentSpeed;
+        }
 
-public void turnRight();
+    }
+
+    @Override
+    public void turnLeft() {
+        if (direction == Direction.NORTH) {
+            direction = Direction.WEST;
+        } else if (direction == Direction.SOUTH) {
+            direction = Direction.EAST;
+        } else if (direction == Direction.EAST) {
+            direction = Direction.NORTH;
+        } else if (direction == Direction.WEST) {
+            direction = Direction.SOUTH;
+        }
+
+    }
+
+    @Override
+    public void turnRight() {
+        if (direction == Direction.NORTH) {
+            direction = Direction.EAST;
+        } else if (direction == Direction.SOUTH) {
+            direction = Direction.WEST;
+        } else if (direction == Direction.EAST) {
+            direction = Direction.SOUTH;
+        } else if (direction == Direction.WEST) {
+            direction = Direction.NORTH;
+        }
+
+    }
 
 }
-
-
