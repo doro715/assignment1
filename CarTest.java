@@ -122,7 +122,16 @@ public class CarTest {
         boolean result = (car.getX() == car.getCurrentSpeed()  && car.getY() == 0);
         reportResult("Car facing east moves along x by its speed", result);
     }
+//    test currentSpeed will never be more than enginePower in task 4 requirements
+    private static void testMaxSpeedLimit(Car car, String carName){
+        car.startEngine();
+        for (int i = 0; i < 100; i++) {
+            car.gas(1);
+        }
+        boolean result = car.getCurrentSpeed() <= car.getEnginePower();
+        reportResult(carName+ "speed does not exceed Engine Power", result);
 
+    }
     static void main() {
         testTurbo();
         testCarFunction(new Saab95(), "Saab95");
@@ -140,6 +149,7 @@ public class CarTest {
         testStationaryCar();
         testMoveNorth();
         testMoveEast();
-
+        testMaxSpeedLimit(new Saab95(),"Saab95");
+        testMaxSpeedLimit(new Volvo240(), "Volvo240");
     }
 }
