@@ -1,3 +1,5 @@
+
+
 public class CarTest {
     private static void reportResult(String testName, boolean success) {
         IO.println((success ? "SUCCESS: " : "FAILURE: ") + testName);
@@ -46,6 +48,80 @@ public class CarTest {
         boolean result = afterBrake == beforeBrake;
         reportResult(carName + " ignore brake above 1", result);
     }
+// Moveable Tests (startingState, Turning, Moving)
+    private static void startingState() {
+        Car car = new Volvo240();
+        boolean result = (car.getDirection() == Car.Direction.NORTH && car.getX() == 0 && car.getY() == 0);
+        reportResult("New car starts at origin facing north", result);
+    }
+
+    //Test 2: one right turn gives EAST.
+    private static void testTurnRight() {
+        Car car = new Volvo240();
+        car.turnRight();
+        boolean result = (car.getDirection() == Car.Direction.EAST);
+        reportResult("New car correctly turns right", result);
+    }
+
+    //Test 3: one left turn gives WEST.
+    private static void testTurnLeft() {
+        Car car = new Volvo240();
+        car.turnLeft();
+        boolean result = (car.getDirection() == Car.Direction.WEST);
+        reportResult("New car correctly turns left", result);
+    }
+    
+    // Test 4: four right turns give NORTH.
+    private static void test4RightTurns() {
+        Car car = new Volvo240();
+        for (int i = 0; i < 4; i++) {
+            car.turnRight();
+        }
+        boolean result = (car.getDirection() == Car.Direction.NORTH);
+        reportResult("New car correctly faces NORTH after 4 right turns", result);
+    }
+    // Test 5: four left turns give NORTH.
+    private static void test4LeftTurns() {
+        Car car = new Volvo240();
+        for (int i = 0; i < 4; i++) {
+            car.turnLeft();
+        }
+        boolean result = (car.getDirection() == Car.Direction.NORTH);
+        reportResult("New car correctly faces NORTH after 4 left turns", result);
+    } 
+
+    // Test 6: a right turn, then a left turn, gives NORTH.
+    private static void testSameDirection() {
+        Car car = new Volvo240();
+        car.turnRight();
+        car.turnLeft();
+        boolean result = (car.getDirection() == Car.Direction.NORTH);
+        reportResult("New car correctly faces NORTH after a right and left turn", result);
+    }
+
+    private static void testStationaryCar() {
+        Car car = new Volvo240();
+        car.move();
+        boolean result = (car.getX() == 0  && car.getY() == 0);
+        reportResult("Car with speed 0 does not move", result);
+    }
+
+    private static void testMoveNorth() {
+        Car car = new Volvo240();
+        car.startEngine();
+        car.move();
+        boolean result = (car.getX() == 0  && car.getY() == car.getCurrentSpeed());
+        reportResult("Car facing north moves along y by its speed", result);
+    }
+
+    private static void testMoveEast() {
+        Car car = new Volvo240();
+        car.turnRight();
+        car.startEngine();
+        car.move();
+        boolean result = (car.getX() == car.getCurrentSpeed()  && car.getY() == 0);
+        reportResult("Car facing east moves along x by its speed", result);
+    }
 
     static void main() {
         testTurbo();
@@ -55,7 +131,15 @@ public class CarTest {
         testGasValidInput(new Volvo240(), "Volvo240");
         testBrakeInvalidInput(new Volvo240(), "Volvo240");
         testBrakeInvalidInput(new Saab95(), "Saab95");
-
+        startingState();
+        testTurnRight();
+        testTurnLeft();
+        test4RightTurns();
+        test4LeftTurns();
+        testSameDirection();
+        testStationaryCar();
+        testMoveNorth();
+        testMoveEast();
 
     }
 }
