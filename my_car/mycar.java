@@ -7,9 +7,10 @@ public abstract class mycar implements my_moveable{
     protected double currentSpeed;
     private double x;
     private double y;
+    private Direction direction;
     protected Color color;
     protected  final String modelName;
-    public enum Direction { NORTH, EAST, SOUTH, WEST }
+    public enum direction { NORTH, EAST, SOUTH, WEST }
 
 //    Constructor
     public mycar(int nrDoors, double enginePower, Color color, String modelName){
@@ -20,9 +21,9 @@ public abstract class mycar implements my_moveable{
         stopEngine();
         this.x = 0;
         this.y = 0;
-        private Direction direction = Direction.NORTH;
+        this.direction = Direction.NORTH;
     }
-//Public interface
+//Public interfaced
     
     public int getNrDoors() {
         return nrDoors;
@@ -67,6 +68,12 @@ public abstract class mycar implements my_moveable{
     public void brake(double amount) {
         decrementSpeed(amount);
     }
+//  my moveable contract
+public void move();
+
+public void turnLeft();
+
+public void turnRight();
 
 }
 

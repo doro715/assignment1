@@ -1,10 +1,9 @@
-
-public class Moveable {
-
+public interface Moveable {
+// An interface is a contract: a list of methods a class promises to have
     public void move();
 
     public void turnLeft();
 
     public void turnRight();
-    
+
 }
