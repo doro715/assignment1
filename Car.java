@@ -88,7 +88,7 @@ public abstract class Car implements Moveable{
         decrementSpeed(amount);
     }
 
-    // Movement (my_moveable interface)
+    // Movement (moveable interface)
     @Override
     public void move() {
         if (direction == Direction.NORTH) {
