@@ -1,11 +1,18 @@
 import java.awt.*;
 
-public abstract class Car {
+public abstract class Car implements Moveable{
     protected int nrDoors;
     protected double enginePower;
     protected double currentSpeed;
     protected Color color;
     protected String modelName;
+    private double x;
+    private double y;
+    private Direction direction;
+
+    public enum Direction {
+        NORTH, EAST, SOUTH, WEST
+    }
 
     // Constructor
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
@@ -14,6 +21,9 @@ public abstract class Car {
         this.color = color;
         this.modelName = modelName;
         stopEngine();
+        this.x = 0;
+        this.y = 0;
+        this.direction = Direction.NORTH;
     }
     // Public interface
 
@@ -43,6 +53,18 @@ public abstract class Car {
 
     public void stopEngine() {
         currentSpeed = 0;
+    }
+    
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
     // Since Saab and Volvo have different bodies of speedFactor, Abstract methods
