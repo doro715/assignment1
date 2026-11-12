@@ -23,17 +23,38 @@ public class CarTest {
         reportResult(carName + " starts the engine with speed > 0", isSpeedUp);
 
         double speedUpBefore = car.getCurrentSpeed();
-        car.gas(2);
+        car.gas(1);
         double speedUpAfter = car.getCurrentSpeed();
         boolean result = speedUpAfter > speedUpBefore;
         reportResult(carName + " has speeded up successfully", result);
 
+    }
+    private static void testGasValidInput(Car car, String carName){
+        car.startEngine();
+        double beforeGas = car.getCurrentSpeed();
+        car.gas(1.5);
+        double afterGas = car.getCurrentSpeed();
+        boolean result = afterGas == beforeGas;
+        reportResult(carName + " ignore gas() above 1", result);
+    }
+
+    private static void testBrakeInvalidInput(Car car, String carName){
+        car.startEngine();
+        double beforeBrake = car.getCurrentSpeed();
+        car.brake( 1.5);
+        double afterBrake = car.getCurrentSpeed();
+        boolean result = afterBrake == beforeBrake;
+        reportResult(carName + " ignore brake above 1", result);
     }
 
     static void main() {
         testTurbo();
         testCarFunction(new Saab95(), "Saab95");
         testCarFunction(new Volvo240(), "Volvo240");
+        testGasValidInput(new Saab95(), "Saab95");
+        testGasValidInput(new Volvo240(), "Volvo240");
+        testBrakeInvalidInput(new Volvo240(), "Volvo240");
+        testBrakeInvalidInput(new Saab95(), "Saab95");
 
 
     }

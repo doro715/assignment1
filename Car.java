@@ -73,18 +73,32 @@ public abstract class Car implements Moveable{
 
     // Internal access that only gas and brake using them
     private void incrementSpeed(double amount) {
+
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        // Setting the max limit for current speed
+        currentSpeed = Math.min(currentSpeed, getEnginePower());
     }
 
     private void decrementSpeed(double amount) {
+
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        // Setting the min limit for current speed
+        currentSpeed = Math.max(currentSpeed,0);
     }
 
     public void gas(double amount) {
+        // Checking if "amount" in acceptable range
+        if (amount < 0 || amount > 1){
+            return;
+        }
         incrementSpeed(amount);
     }
 
     public void brake(double amount) {
+        // Checking if "amount" in acceptable range
+        if (amount < 0 || amount > 1){
+            return;
+        }
         decrementSpeed(amount);
     }
 
