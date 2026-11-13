@@ -1,7 +1,5 @@
 import java.awt.*;
 
-import java.awt.Color;
-
 public class Saab95 extends Car {
     //    only Saab knew this
     private boolean turboOn;
